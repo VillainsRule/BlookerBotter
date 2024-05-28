@@ -11,6 +11,15 @@
 support not provided to idiots
 
 <br>
+<h2 align="center">demo</h2>
+
+i did this to the following set(s):
+
+- https://dashboard.blooket.com/set/65bd5eee9cd63ddb994d5993
+
+i don't own any of these, i just found something about them funny.
+
+<br>
 <h2 align="center">proxies</h2>
 
 blooket apparently blocks most proxies that i could find, so i didn't bother implementing.<br>

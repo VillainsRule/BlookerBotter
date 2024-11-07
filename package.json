@@ -1,10 +1,10 @@
 {
-    "name": "blookbotter",
+    "name": "blookerbotter",
     "type": "module",
     "main": "src/main.js",
     "scripts": {
-        "start": "node src/main.js",
-        "dev": "nodemon -e 'js' src/main.js"
+        "start": "bun src/main.js",
+        "dev": "bun --watch src/main.js"
     },
     "dependencies": {
         "axios": "^1.7.2"

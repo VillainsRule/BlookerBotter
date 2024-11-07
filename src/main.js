@@ -1,19 +1,21 @@
 import axios from 'axios';
-import readline from 'readline';
+import readline from 'node:readline';
 
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 let count = 0;
+let successful = 0;
+let failed = 0;
 
-console.log(`\n\t   enter a bsid to begin:`);
+console.log(`\n   enter a bsid to begin:`);
 
-rl.question('\t   > ', (bsid) => {
-    console.log('\tbsid entered! enter a game ID:');
+rl.question('   > ', (bsid) => {
+    console.log('\n   bsid entered! enter a game ID:');
 
-    rl.question('\n\t   > ', (id) => {
-        console.log('\n\tepic, botting...');
+    rl.question('   > ', async (id) => {
+        console.log('\n   botting...\n');
 
-        setInterval(() => {
+        for (let i = 0; i < Number.MAX_SAFE_INTEGER; i++) {
             axios.post('https://play.blooket.com/api/playersessions/solo', {
                 gameMode: 'Defense',
                 questionSetId: id
@@ -25,8 +27,22 @@ rl.question('\t   > ', (bsid) => {
                 }
             }).then(() => {
                 count++;
-                console.log(`\tsent play request <> now at ${count} requests!`);
-            }).catch(() => console.log(`\tcurrently rate limited (or some other err occured).`));
-        }, 20);
+                successful++;
+
+                console.log(`   sent play request <> now at ${successful} successful requests!`);
+            }).catch(() => {
+                count++;
+                failed++;
+
+                console.log(`   error occurred fetching. probably ratelimits.`);
+            });
+
+            await new Promise((r) => setTimeout(r, 64));
+        }
     });
+});
+
+process.on('SIGINT', () => {
+    console.log(`\n   botting session ended! successful: ${successful}, failed: ${failed}, total: ${count}`);
+    process.exit();
 });
